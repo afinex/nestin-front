@@ -1,29 +1,11 @@
-const RegisterForm = ({
+const LoginForm = ({
   handleSubmit,
-  name,
-  setName,
   email,
   setEmail,
   password,
   setPassword
 }) => (
     <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="exampleInputName1" className="form-label">
-          Name
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="exampleInputName1"
-          aria-describedby="nameHelp"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <div id="nameHelp" className="form-text">
-          Enter your name or username
-        </div>
-      </div>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -53,17 +35,11 @@ const RegisterForm = ({
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
-      <div className="col-auto">
-        <span id="passwordHelpInline" className="form-text">
-          Must be 8-20 characters long.
-        </span>
-      </div>
       
-      <button type="submit" className="btn btn-primary" disabled={!name || !email || !password}>
-        Register
+      <button type="submit" className="btn btn-primary" disabled={ !email || !password}>
+        Login
       </button>
     </form>
   );
 
-  export default RegisterForm;
+  export default LoginForm;
