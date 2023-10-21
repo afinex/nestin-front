@@ -3,11 +3,13 @@ import axios from "axios";
 import LoginForm from "../../Components/LoginForm";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const Login = ({history}) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -24,12 +26,11 @@ const Login = ({history}) => {
           window.localStorage.setItem("auth", JSON.stringify(res.data));
           dispatch({
             type : "LOGGED_IN_USER",
-            action : res.data,
+            payload : res.data,
           });
-
-          history.push("/dashboard");
-         
         }
+
+        history.push("/dashboard");
 
         console.log(res);
     } catch (error) {

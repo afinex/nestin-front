@@ -1,45 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const TopNav = () =>(
-  <div>
-      <nav className="navbar navbar-expand-lg bg-light">
-    <div className="container-fluid">
-      <a className="navbar-brand" href="#">Navbar</a>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/register">Register</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">Login</Link>
-          </li>
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Action</a></li>
-              <li><a className="dropdown-item" href="#">Another action</a></li>
-              <li></li>
-              <li><a className="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+const TopNav = () => {
+  const history = useHistory();
+  const { auth } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
+
+  const logout = () =>{
+    dispatch({
+      type : "LOGGED_OUT_USER",
+      payload : null,
+    });
+    window.localStorage.removeItem("auth");
+    history.push("/login");
+  }
+
+  return (
+    <div>
+      <header class="p-3 mb-3 border-bottom">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <Link to="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"></svg>
+            </Link>
+
+            { auth === null && (<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><Link to="/" class="nav-link px-2 link-secondary">Home</Link></li>
+              <li><Link to="/login" class="nav-link px-2 link-dark">Login</Link></li>
+              <li><Link to="/register" class="nav-link px-2 link-dark">Register</Link></li>
+            </ul>)}
+
+            
+            { auth && (<div class="dropdown text-end">
+              <Link to="/profile" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+              </Link>
+              <ul class="dropdown-menu text-small">
+                <li><Link to="/settings" class="dropdown-item">Settings</Link></li>
+                <li><Link to="/profile" class="dropdown-item">Profile</Link></li>
+                <li><a onClick={logout} class="dropdown-item">Sign out</a></li>
+              </ul>
+            </div>)}
+          </div>
+        </div>
+      </header>
     </div>
-  </nav>
-  </div>
-)
+  );
+};
 
 export default TopNav;
