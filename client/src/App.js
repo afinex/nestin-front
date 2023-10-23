@@ -1,4 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AuthRoute from "./middleware/authRoute";
 
 import Home from './resources/js/Pages/Booking/Home'
 import Register from './resources/js/Pages/Auth/Register'
@@ -28,7 +29,7 @@ const App = () => {
       <Route exact path="/" component={Home}></Route>
       <Route exact path="/login" component={Login}></Route>
       <Route exact path="/register" component={Register}></Route>
-      <Route exact path="/dashboard" component={Dashboard}></Route>
+      <AuthRoute exact path="/dashboard" component={Dashboard}></AuthRoute>
     </Switch>
     </BrowserRouter>
   );
