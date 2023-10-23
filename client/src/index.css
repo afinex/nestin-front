@@ -11,3 +11,22 @@ code {
 }
 
 .pointer {cursor: pointer;}
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color:black;
+  
+}
+
+.nav-link:focus {
+  color: red;
+}
+
+.nav-link.active {
+  color: red;
+}
