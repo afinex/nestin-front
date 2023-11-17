@@ -18,15 +18,8 @@ code {
   transition: color 0.3s;
 }
 
-.nav-link:hover {
-  color:black;
-  
-}
-
-.nav-link:focus {
-  color: red;
-}
-
+.nav-link:hover,
+.nav-link:focus,
 .nav-link.active {
-  color: red;
+  color: red !important;
 }
