@@ -44,25 +44,25 @@ const TopNav = () => {
             </li>
           </ul>)}
           
-          {auth && (<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          {auth  !== null && (<ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li>
               <Link to="/dashboard" className="nav-link px-2">
                 Dashboard
               </Link>
             </li>
             <li>
-              <NavLink to="/dashboard/bookings" className="nav-link px-2" activeClassName="active">
-                Booking
-              </NavLink>
+              <Link to="/" className="nav-link px-2" >
+                Browse Hotelsss
+              </Link>
             </li>
             <li>
-              <NavLink to="/dashboard/hotels" className="nav-link px-2" activeClassName="active">
-                Hotels
+              <NavLink to="/hotels/new" className="nav-link px-2" activeClassName="active">
+                Add Hotel
               </NavLink>
             </li>
           </ul>)}
 
-          {auth && (
+          {auth !== null && (
             <div className="dropdown text-end">
               <Link
                 to="/profile"
